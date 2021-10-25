@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://<db인스턴스 엔드포인트>:<db인스턴스 포트>/sellers?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    username: <aws에서 설정한 db인스턴스 username>
+    password: <aws에서 설정한 db인스턴스 password>
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
