@@ -10,6 +10,9 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'io.spring.dependency-management'
 
+allOpen {
+    annotation("javax.persistence.Entity")
+}
 repositories {
     mavenCentral()
 }
