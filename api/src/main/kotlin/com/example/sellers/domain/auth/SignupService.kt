@@ -7,7 +7,11 @@ import org.mindrot.jbcrypt.BCrypt
 import org.springframework.beans.factory.annotation.Autowired
 
 class SignupService @Autowired constructor(private val userRepository: UserRepository) {
-
+    fun signup(signUpRequest: SignUpRequest){
+        validateRequest(signUpRequest)
+        checkDuplicates(signUpRequest.email)
+        registerUser(signUpRequest)
+    }
     private fun validateRequest(signUpRequest: SignUpRequest){
         validateEmail(signUpRequest.email)
         validateName(signUpRequest.name)
