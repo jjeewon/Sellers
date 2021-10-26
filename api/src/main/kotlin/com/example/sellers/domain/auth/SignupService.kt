@@ -1,7 +1,9 @@
 package com.example.sellers.domain.auth
 
 import com.example.sellers.SellersException
+import com.example.sellers.domain.user.User
 import com.example.sellers.domain.user.UserRepository
+import org.mindrot.jbcrypt.BCrypt
 import org.springframework.beans.factory.annotation.Autowired
 
 class SignupService @Autowired constructor(private val userRepository: UserRepository) {
@@ -33,4 +35,12 @@ class SignupService @Autowired constructor(private val userRepository: UserRepos
         userRepository.findByEmail(email)?.let {
             throw SellersException("이미 사용 중인 이메일입니다.")
         }
+
+    private fun registerUser(signUpRequest: SignUpRequest){
+        with(signUpRequest){
+            val hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt())
+            val user = User(email, hashedPassword, name)
+            userRepository.save(user)
+        }
+    }
 }
