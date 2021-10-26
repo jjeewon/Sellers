@@ -22,6 +22,9 @@ class User (
         updatedAt = Date()
     }
 
-   
+    @PreUpdate
+    fun preUpdate(){
+        updatedAt = Date()
+    }
 }
 
