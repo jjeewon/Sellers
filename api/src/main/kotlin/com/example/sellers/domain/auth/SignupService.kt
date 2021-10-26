@@ -28,4 +28,9 @@ class SignupService @Autowired constructor(private val userRepository: UserRepos
         if(password.trim().length !in 8..20)
             throw SellersException("비밀번호는 공백을 제외하고 8자 이상 20자 이하여야 합니다.")
     }
+
+    private fun checkDuplicates(email: String) =
+        userRepository.findByEmail(email)?.let {
+            throw SellersException("이미 사용 중인 이메일입니다.")
+        }
 }
