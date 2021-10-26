@@ -12,6 +12,16 @@ class User (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
-    
+
+    var createdAt: Date? = null
+    var updatedAt: Date? = null
+
+    @PrePersist
+    fun prePersist(){
+        createdAt = Date()
+        updatedAt = Date()
+    }
+
+   
 }
 
