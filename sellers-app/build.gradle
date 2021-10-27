@@ -35,5 +35,6 @@ ext{
     rxjava3_retrofit_adapter_version = "3.0.0-RC8"
     rxjava2_version = "2.1.10"
     rxjava2_android_version = "2.0.1"
+    okhttp3_version = "4.9.1"
 
 }
