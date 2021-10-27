@@ -5,7 +5,9 @@ import com.example.sellers.domain.user.User
 import com.example.sellers.domain.user.UserRepository
 import org.mindrot.jbcrypt.BCrypt
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
+@Service
 class SignupService @Autowired constructor(private val userRepository: UserRepository) {
     fun signup(signUpRequest: SignUpRequest){
         validateRequest(signUpRequest)
