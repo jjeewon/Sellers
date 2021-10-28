@@ -8,6 +8,7 @@ import com.gomdolstudio.covidinfoapp.di.factory.AssistedSavedStateViewModelFacto
 import com.gomdolstudio.sellers.api.request.SigninRequest
 import com.gomdolstudio.sellers.api.response.ApiResponse
 import com.gomdolstudio.sellers.api.response.SigninResponse
+import com.gomdolstudio.sellers.common.Prefs
 import com.gomdolstudio.sellers.data.service.SigninService
 import com.gomdolstudio.sellers.util.SingleLiveEvent
 import com.squareup.inject.assisted.Assisted
@@ -52,7 +53,11 @@ class SigninViewModel @AssistedInject constructor(@Assisted private val savedSta
                 .subscribe(::onSigninResponse))
     }
     private fun onSigninResponse(response: ApiResponse<SigninResponse>) {
-        if (response.success) {
+        if (response.success && response.data != null) {
+            Prefs.token = response.data.token
+            Prefs.refreshToken = response.data.refreshToken
+            Prefs.userName = response.data.userName
+            Prefs.userId = response.data.userId
             showToast.postValue( "로그인되었습니다.")
             // TODO. 상품 리스트 화면으로 이동
         } else {
