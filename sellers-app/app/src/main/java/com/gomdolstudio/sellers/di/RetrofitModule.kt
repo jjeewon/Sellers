@@ -1,6 +1,7 @@
 package com.gomdolstudio.sellers.di
 
 import com.gomdolstudio.sellers.data.service.HelloService
+import com.gomdolstudio.sellers.data.service.SigninService
 import com.gomdolstudio.sellers.data.service.SignupService
 import dagger.Module
 import dagger.Provides
@@ -19,6 +20,10 @@ class RetrofitModule {
     fun provideSignupRetrofitService(retrofit: Retrofit): SignupService {
         return retrofit.create(SignupService::class.java)
     }
-
+    @Provides
+    @Reusable
+    fun provideSigninRetrofitService(retrofit: Retrofit): SigninService {
+        return retrofit.create(SigninService::class.java)
+    }
 }
 
