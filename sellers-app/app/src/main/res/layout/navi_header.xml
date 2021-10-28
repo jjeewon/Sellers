@@ -8,24 +8,24 @@
         <ImageView
             android:id="@+id/header_iv"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/name_tv"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
             android:src="@mipmap/ic_launcher_round"
         />
 
         <TextView
             android:id="@+id/name_tv"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="@+id/header_iv"
             app:layout_constraintTop_toBottomOf="@id/header_iv"
             app:layout_constraintBottom_toBottomOf="parent"
             android:paddingTop="5dp"
-            android:textSize="50dp"
+            android:textSize="20dp"
             android:text="사용자명 "
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
