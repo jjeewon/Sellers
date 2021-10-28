@@ -1,4 +1,4 @@
-package com.gomdolstudio.sellers.ui
+package com.gomdolstudio.sellers.ui.signup
 
 import android.os.Bundle
 import android.widget.Toast

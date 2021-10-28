@@ -1,22 +1,17 @@
-package com.gomdolstudio.sellers.ui
+package com.gomdolstudio.sellers.ui.signup
 
-import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.gomdolstudio.covidinfoapp.di.factory.AssistedSavedStateViewModelFactory
 import com.gomdolstudio.sellers.api.request.SignupRequest
 import com.gomdolstudio.sellers.api.response.ApiResponse
-import com.gomdolstudio.sellers.data.service.HelloService
 import com.gomdolstudio.sellers.data.service.SignupService
 import com.gomdolstudio.sellers.util.SingleLiveEvent
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.time.LocalDate
 
 class SignupViewModel @AssistedInject constructor(@Assisted private val savedStateHandle: SavedStateHandle,
                                                 private val signupService: SignupService): ViewModel(){
