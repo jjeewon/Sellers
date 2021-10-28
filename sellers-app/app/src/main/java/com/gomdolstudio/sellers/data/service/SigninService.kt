@@ -10,5 +10,5 @@ import retrofit2.http.POST
 
 interface SigninService {
     @POST("/api/v1/signin")
-    fun signup(@Body signinRequest: SigninRequest) : Single<ApiResponse<SigninResponse>>
+    fun signin(@Body signinRequest: SigninRequest) : Single<ApiResponse<SigninResponse>>
 }
