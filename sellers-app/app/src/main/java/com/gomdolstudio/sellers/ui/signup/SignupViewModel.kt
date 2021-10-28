@@ -34,7 +34,7 @@ class SignupViewModel @AssistedInject constructor(@Assisted private val savedSta
     private fun isNotValidSignup(signupRequest: SignupRequest) =
         when {
             signupRequest.isNotValidEmail() -> {
-                showToast.postValue( "이메일 형식이 정확하 않습니다.")
+                showToast.postValue( "이메일 형식이 정확하지 않습니다.")
                 true
             }
             signupRequest.isNotValidName() -> {
