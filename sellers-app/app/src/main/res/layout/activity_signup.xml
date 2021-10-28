@@ -5,11 +5,12 @@
     <data>
         <variable
             name="signupViewModel"
-            type="com.gomdolstudio.sellers.ui.SignupViewModel" />
+            type="com.gomdolstudio.sellers.ui.signup.SignupViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/img_sign"
         >
         <TextView
             android:id="@+id/signup_tv"
@@ -18,9 +19,9 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="130dp"
             android:text="회원가입"
-            android:textSize="30dp"
+            android:textSize="20dp"
             />
         <TextView
             android:id="@+id/email_tv"
