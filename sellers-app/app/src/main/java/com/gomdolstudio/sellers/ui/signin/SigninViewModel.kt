@@ -28,10 +28,21 @@ class SigninViewModel @AssistedInject constructor(@Assisted private val savedSta
     fun getShowToast(): SingleLiveEvent<String>{
         return showToast
     }
+    private val signupClickEvent = SingleLiveEvent<Void>()
+    fun getSignupClickEvent(): SingleLiveEvent<Void>{
+        return signupClickEvent
+    }
+    private val moveToProductMainEvent = SingleLiveEvent<Void>()
+    fun getMoveToProductMainEvent(): SingleLiveEvent<Void>{
+        return moveToProductMainEvent
+    }
     fun signin(){
         val request = SigninRequest(inputEmail.value!!,inputPassword.value!!)
         if (isNotValidSignin(request)) return
         requestSignin(request)
+    }
+    fun signup(){
+        signupClickEvent.call()
     }
 
     fun isNotValidSignin(signinRequest: SigninRequest) =
@@ -59,7 +70,7 @@ class SigninViewModel @AssistedInject constructor(@Assisted private val savedSta
             Prefs.userName = response.data.userName
             Prefs.userId = response.data.userId
             showToast.postValue( "로그인되었습니다.")
-            // TODO. 상품 리스트 화면으로 이동
+            moveToProductMainEvent.postValue(null)
         } else {
             showToast.postValue( response.message ?: "알 수 없는 오류가 발생했습니다.")
         }
