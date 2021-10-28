@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sellers">
 
-        <activity android:name=".ui.SignupActivity">
+        <activity android:name=".ui.signup.SignupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

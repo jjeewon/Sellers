@@ -8,7 +8,7 @@ import com.gomdolstudio.musicapp_assistedinjection.di.scope.ActivityContext
 import com.gomdolstudio.musicapp_assistedinjection.di.scope.ActivityScope
 import com.gomdolstudio.sellers.R
 import com.gomdolstudio.sellers.databinding.ActivitySignupBinding
-import com.gomdolstudio.sellers.ui.SignupActivity
+import com.gomdolstudio.sellers.ui.signup.SignupActivity
 import dagger.Module
 import dagger.Provides
 
@@ -25,7 +25,7 @@ class SignupModule {
         @JvmStatic
         @Provides
         @ActivityScope
-        fun provideViewModelProvider(activity:SignupActivity, viewModelFactory: InjectingSavedStateViewModelFactory): ViewModelProvider {
+        fun provideViewModelProvider(activity: SignupActivity, viewModelFactory: InjectingSavedStateViewModelFactory): ViewModelProvider {
             return ViewModelProvider(activity, viewModelFactory.create(activity))
         }
 
