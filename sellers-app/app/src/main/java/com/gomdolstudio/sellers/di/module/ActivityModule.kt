@@ -3,6 +3,7 @@ package com.gomdolstudio.sellers.di.module
 import com.gomdolstudio.musicapp_assistedinjection.di.scope.ActivityScope
 import com.gomdolstudio.sellers.ui.SplashActivity
 import com.gomdolstudio.sellers.ui.product.ProductMainActivity
+import com.gomdolstudio.sellers.ui.product.registration.ProductRegistrationActivity
 import com.gomdolstudio.sellers.ui.signin.SigninActivity
 import com.gomdolstudio.sellers.ui.signup.SignupActivity
 import dagger.Module
@@ -25,4 +26,8 @@ abstract class ActivityModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [(ProductMainModule::class)])
     abstract fun getProductMainActivity(): ProductMainActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [(ProductRegistrationModule::class)])
+    abstract fun getProductRegistrationActivity(): ProductRegistrationActivity
 }
