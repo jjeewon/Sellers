@@ -5,12 +5,19 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 
 @Component
 class TokenValidationInterceptor @Autowired constructor(
     private val userContextHolder: UserContextHolder
 ) : HandlerInterceptor {
     private val logger = LoggerFactory.getLogger(this::class.java)
+
+    override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
+        return super.preHandle(request, response, handler)
+    }
+    
     companion object {
         private const val AUTHORIZATION = "Authorization"
         private const val BEARER = "Bearer"
