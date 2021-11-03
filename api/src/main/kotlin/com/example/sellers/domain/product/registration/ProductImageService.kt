@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import sun.rmi.runtime.Log
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -37,22 +38,26 @@ class ProductImageService @Autowired constructor(
         val uuid = UUID.randomUUID().toString()
         val date = SimpleDateFormat("yyyyMMdd").format(Date())
 
-        val filePath = "/images/$date/$uuid.$extension"
-        val targetFile = File("$uploadPath/$filePath")
+        //val filePath = "/images/$date/$uuid.$extension"
+        val filePath  = "/Users/jiwon/Documents/documents/GitHub/Sellers/$date/$uuid.$extension"
+        //val targetFile = File("$uploadPath/$filePath")
+        val targetFile = File("$filePath")
         val thumbnail = targetFile.absolutePath
             .replace(uuid, "$uuid-thumb")
             .let(::File)
-
-        targetFile.parentFile.mkdirs()
-        image.transferTo(targetFile)
-
+        val isOk = targetFile.parentFile.mkdirs()
+        try{
+            image.transferTo(targetFile)
+        }catch (e: Exception){
+            System.out.println("donghan"+e.message)
+            System.out.println("donghan"+e.stackTrace.toString())
+        }
         Thumbnails.of(targetFile)
             .crop(Positions.CENTER)
             .size(300, 300)
             .outputFormat("jpg")
             .outputQuality(0.8f)
             .toFile(thumbnail)
-
         return filePath
     }
 

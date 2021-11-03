@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="productMainViewModel"
+            type="com.gomdolstudio.sellers.ui.product.ProductMainViewModel" />
+    </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
@@ -31,22 +36,36 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_height="match_parent"
                         android:src="@drawable/logo" />
                     <Button
                         android:id="@+id/search_btn"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginRight="20dp"
+                        android:background="@drawable/img_search"
 
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.appcompat.widget.Toolbar>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/transparent"
+                android:backgroundTint="#190069"
+                app:maxImageSize="50dp"
+                android:src="@drawable/ic_add"
+                android:layout_margin="16dp"
+                android:onClick="@{()->productMainViewModel.register()}"
+                />
 
         </RelativeLayout>
 

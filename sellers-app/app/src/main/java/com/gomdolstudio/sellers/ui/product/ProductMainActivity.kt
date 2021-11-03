@@ -3,12 +3,13 @@ package com.gomdolstudio.sellers.ui.product
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.gomdolstudio.sellers.R
 import com.gomdolstudio.sellers.common.Prefs
 import com.gomdolstudio.sellers.databinding.ActivityProductmainBinding
+import com.gomdolstudio.sellers.ui.product.registration.ProductRegistrationActivity
 import com.gomdolstudio.sellers.ui.signin.SigninActivity
 import com.google.android.material.navigation.NavigationView
 import dagger.android.support.DaggerAppCompatActivity
@@ -25,8 +26,13 @@ class ProductMainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigati
         super.onCreate(savedInstanceState)
         productMainViewModel = viewModelProvider.get(ProductMainViewModel::class.java)
         binding.lifecycleOwner = this
+        binding.productMainViewModel = productMainViewModel
         binding.navView.setNavigationItemSelectedListener(this)
         setupDrawerListener()
+        productMainViewModel.getRegistrationClickEvent().observe(this, Observer {
+            startActivity(Intent(this@ProductMainActivity, ProductRegistrationActivity::class.java))
+            finish()
+        })
     }
 
     private fun setupDrawerListener(){

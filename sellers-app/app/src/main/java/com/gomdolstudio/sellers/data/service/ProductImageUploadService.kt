@@ -11,5 +11,5 @@ import retrofit2.http.Part
 interface ProductImageUploadService {
     @Multipart
     @POST("/api/v1/product_images")
-    fun uploadProductImages(@Part images: MultipartBody.Part) : Single<ApiResponse<ProductImageUploadResponse>>
+    fun uploadProductImage(@Part images: MultipartBody.Part) : Single<ApiResponse<ProductImageUploadResponse>>
 }
