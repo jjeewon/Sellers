@@ -5,5 +5,5 @@ data class ProductRegistrationRequest (
     val description: String,
     val price: Int,
     val categoryId: Int,
-    val imagesIds: List<Long?>
+    val imageIds: List<Long?>?
         )

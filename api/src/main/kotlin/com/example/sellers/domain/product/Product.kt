@@ -11,7 +11,7 @@ class Product (
     @Column(length = 500)
     var description: String,
     var price: Int,
-    var categoriId: Int,
+    var categoryId: Int,
     @Enumerated(EnumType.STRING)
     var status: ProductStatus,
     @OneToMany

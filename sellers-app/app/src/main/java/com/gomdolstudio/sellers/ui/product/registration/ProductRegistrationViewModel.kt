@@ -66,6 +66,10 @@ class ProductRegistrationViewModel @AssistedInject constructor(
     fun getRegistrationClickEvent(): SingleLiveEvent<Void>{
         return registrationClickEvent
     }
+    private val moveToProductMainEvent = SingleLiveEvent<Void>()
+    fun getMoveToProductMainEvent(): SingleLiveEvent<Void>{
+        return moveToProductMainEvent
+    }
     fun getImageFromGallery(num: Int){
         imageViewClickEvent.postValue(num)
     }
@@ -113,8 +117,8 @@ class ProductRegistrationViewModel @AssistedInject constructor(
     private fun onImageUploadResponse(response: ApiResponse<ProductImageUploadResponse>) {
         if (response.success && response.data != null) {
             Log.d("imageregistration", "이미지 업로드 성공")
-            imageUrls[current_iv_id].postValue(response.data.filePath)
-            imageIds[current_iv_id] = response.data.productImageId
+            imageUrls[current_iv_id-1].postValue(response.data.filePath)
+            imageIds[current_iv_id-1] = response.data.productImageId
         } else {
             Log.d("imageregistration", response.message + "?: 알 수 없는 오류가 발생했습니다.")
         }
@@ -126,7 +130,7 @@ class ProductRegistrationViewModel @AssistedInject constructor(
             inputDescription.value,
             inputPrice.value?.toIntOrNull(),
             categoryIdSelected,
-            imageIds
+            imageIds.filterNotNull()
             )
         if (isNotValidRegistration(request)) return
         requestRegistration(request)
@@ -140,7 +144,7 @@ class ProductRegistrationViewModel @AssistedInject constructor(
     private fun onProductRegistrationResponse(response: ApiResponse<Response<Void>>) {
         if (response.success) {
             showToast.postValue( "상품이 등록되었습니다.")
-            //moveToProductMainEvent.postValue(null)
+            moveToProductMainEvent.postValue(null)
         } else {
             showToast.postValue( response.message ?: "알 수 없는 오류가 발생했습니다.")
         }

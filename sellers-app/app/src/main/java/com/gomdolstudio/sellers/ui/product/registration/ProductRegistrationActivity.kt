@@ -19,6 +19,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.gomdolstudio.sellers.databinding.ActivityProductregistrationBinding
+import com.gomdolstudio.sellers.ui.product.ProductMainActivity
 import dagger.android.support.DaggerAppCompatActivity
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -57,12 +58,21 @@ class ProductRegistrationActivity : DaggerAppCompatActivity() {
          })
         productRegistraionViewModel.getShowToast().observe(this,
             Observer {text -> Toast.makeText(this, text, Toast.LENGTH_LONG).show()})
+        productRegistraionViewModel.getMoveToProductMainEvent().observe(this,
+            Observer {
+                startActivity(Intent(this@ProductRegistrationActivity, ProductMainActivity::class.java))
+                finish()})
     }
     val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let{
             val bitmap = getBitmapFromUri(uri)
             bitmap?.let {
-                binding.iv1.setImageBitmap(bitmap)
+                when(productRegistraionViewModel.current_iv_id){
+                    1 -> binding.iv1.setImageBitmap(bitmap)
+                    2 -> binding.iv2.setImageBitmap(bitmap)
+                    3 -> binding.iv3.setImageBitmap(bitmap)
+                    4 -> binding.iv4.setImageBitmap(bitmap)
+                }
                 val file = bitmapToFile(bitmap, "jiji.png",getExternalFilesDir(Environment.DIRECTORY_DCIM).toString())
                 productRegistraionViewModel.imageUpload(file!!)
             }
