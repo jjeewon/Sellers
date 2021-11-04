@@ -1,11 +1,11 @@
 package com.gomdolstudio.sellers.ui.product
-
+import android.app.Fragment
+import com.gomdolstudio.sellers.ui.product.list.ProductListFragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+
 import com.gomdolstudio.sellers.R
 import com.gomdolstudio.sellers.common.Prefs
 import com.gomdolstudio.sellers.databinding.ActivityProductmainBinding
@@ -18,35 +18,16 @@ import javax.inject.Inject
 class ProductMainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     @Inject
     lateinit var binding: ActivityProductmainBinding
-    @Inject
-    lateinit var viewModelProvider: ViewModelProvider
-    private lateinit var productMainViewModel: ProductMainViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        productMainViewModel = viewModelProvider.get(ProductMainViewModel::class.java)
         binding.lifecycleOwner = this
-        binding.productMainViewModel = productMainViewModel
         binding.navView.setNavigationItemSelectedListener(this)
-        setupDrawerListener()
-        productMainViewModel.getRegistrationClickEvent().observe(this, Observer {
-            startActivity(Intent(this@ProductMainActivity, ProductRegistrationActivity::class.java))
-            finish()
-        })
-    }
+        setUpDrawerListener()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, ProductListFragment())
+            .commitNow()
 
-    private fun setupDrawerListener(){
-        val toggle = ActionBarDrawerToggle(
-            this,
-            binding.drawerLayout,
-            binding.toolbar,
-            R.string.open_drawer_description,
-            R.string.close_drawer_description
-        )
-        binding.drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
     }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.title) {
             MENU_TITLE_INQUERY -> { }
@@ -61,8 +42,25 @@ class ProductMainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigati
         return true
     }
 
+    fun setUpDrawerListener(){
+        val toggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            binding.toolbar,
+            R.string.open_drawer_description,
+            R.string.close_drawer_description
+        )
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+    }
+
+    fun moveToRegistrationActivity(){
+        startActivity(Intent(this@ProductMainActivity, ProductRegistrationActivity::class.java))
+    }
+
     companion object {
         private const val MENU_TITLE_INQUERY = "문의"
         private const val MENU_TITLE_LOGOUT = "로그아웃"
     }
+
 }

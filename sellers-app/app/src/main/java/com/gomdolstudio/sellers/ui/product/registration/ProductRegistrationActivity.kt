@@ -37,6 +37,11 @@ class ProductRegistrationActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.let{
+            it.setDisplayHomeAsUpEnabled(true)
+            it.title = "상품 등록"
+        }
+
         productRegistraionViewModel = viewModelProvider.get(ProductRegistrationViewModel::class.java)
         binding.lifecycleOwner = this
         binding.productRegistrationViewModel = productRegistraionViewModel
@@ -93,5 +98,10 @@ class ProductRegistrationActivity : DaggerAppCompatActivity() {
             return image
         }
         return null
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

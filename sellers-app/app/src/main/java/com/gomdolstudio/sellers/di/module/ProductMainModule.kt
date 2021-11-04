@@ -9,13 +9,16 @@ import com.gomdolstudio.musicapp_assistedinjection.di.scope.ActivityScope
 import com.gomdolstudio.sellers.R
 import com.gomdolstudio.sellers.databinding.ActivityProductmainBinding
 import com.gomdolstudio.sellers.databinding.ActivitySigninBinding
+import com.gomdolstudio.sellers.di.scope.FragmentScope
 import com.gomdolstudio.sellers.ui.product.ProductMainActivity
+import com.gomdolstudio.sellers.ui.product.list.ProductListFragment
 import com.gomdolstudio.sellers.ui.signin.SigninActivity
 import dagger.Module
 import dagger.Provides
+import dagger.android.ContributesAndroidInjector
 
 @Module
-class ProductMainModule {
+abstract class ProductMainModule {
     @Module
     companion object{
         @JvmStatic
@@ -24,12 +27,15 @@ class ProductMainModule {
         fun provideProductMainActivityBinding(activity: ProductMainActivity): ActivityProductmainBinding {
             return DataBindingUtil.setContentView(activity, R.layout.activity_productmain)
         }
-        @JvmStatic
+        /*
+         @JvmStatic
         @Provides
         @ActivityScope
         fun provideViewModelProvider(activity: ProductMainActivity, viewModelFactory: InjectingSavedStateViewModelFactory): ViewModelProvider {
             return ViewModelProvider(activity, viewModelFactory.create(activity))
         }
+         */
+
 
         @ActivityContext
         @JvmStatic
@@ -38,4 +44,11 @@ class ProductMainModule {
             return activity
         }
     }
+
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [(ProductListModule::class)])
+    abstract fun getProductListFragment(): ProductListFragment
+
+
+
 }
