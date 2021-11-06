@@ -1,21 +1,22 @@
 package com.example.sellers.controller
 
 import com.example.sellers.ApiResponse
+import com.example.sellers.domain.product.Product
+import com.example.sellers.domain.product.ProductService
 import com.example.sellers.domain.product.registration.ProductImageService
 import com.example.sellers.domain.product.registration.ProductRegistrationRequest
 import com.example.sellers.domain.product.registration.ProductRegistrationService
+import com.example.sellers.domain.product.toProductListItemResponse
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/api/v1")
 class ProductApiController @Autowired constructor(
     private val productImageService: ProductImageService,
-    private val productRegistration: ProductRegistrationService
+    private val productRegistration: ProductRegistrationService,
+    private val productService: ProductService
 ){
     @PostMapping("/product_images")
     fun uploadImage(image: MultipartFile) = ApiResponse.ok(
@@ -28,4 +29,16 @@ class ProductApiController @Autowired constructor(
     ) = ApiResponse.ok(
         productRegistration.register(request)
     )
+
+    @GetMapping("/products")
+    fun search(
+        @RequestParam productId: Long,
+        @RequestParam(required = false) categoryId: Int?,
+        @RequestParam direction: String,
+        @RequestParam(required = false) keyword: String?,
+        @RequestParam(required = false) limit: Int?
+    ) = productService
+        .search(categoryId, productId, direction, keyword, limit ?: 10)
+        .mapNotNull(Product::toProductListItemResponse)
+        .let { ApiResponse.ok(it) }
 }
