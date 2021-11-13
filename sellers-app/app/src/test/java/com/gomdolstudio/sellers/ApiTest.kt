@@ -42,10 +42,7 @@ class ApiTest {
 
     }
 
-    @Test
-    fun 헬로데이터테스트(){
-        helloService.getWorld().subscribe(System.out::println)
-    }
+
 
     @Test
     fun 회원가입테스트(){
