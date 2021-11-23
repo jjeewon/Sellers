@@ -34,6 +34,8 @@ class ProductService @Autowired constructor(
         }
     }
 
+    fun get(id: Long) = productRepository.findByIdOrNull(id)
+
     data class ProductSearchCondition(
         val categoryIdIsNotNull: Boolean,
         val direction: String,

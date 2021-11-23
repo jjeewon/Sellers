@@ -1,12 +1,14 @@
 package com.example.sellers.controller
 
 import com.example.sellers.ApiResponse
+import com.example.sellers.SellersException
 import com.example.sellers.domain.product.Product
 import com.example.sellers.domain.product.ProductService
 import com.example.sellers.domain.product.registration.ProductImageService
 import com.example.sellers.domain.product.registration.ProductRegistrationRequest
 import com.example.sellers.domain.product.registration.ProductRegistrationService
 import com.example.sellers.domain.product.toProductListItemResponse
+import com.example.sellers.domain.product.toProductResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
@@ -41,4 +43,9 @@ class ProductApiController @Autowired constructor(
         .search(categoryId, productId, direction, keyword, limit ?: 10)
         .mapNotNull(Product::toProductListItemResponse)
         .let { ApiResponse.ok(it) }
+
+    @GetMapping("/products/{id}")
+    fun get(@PathVariable id: Long) = productService.get(id)?.let {
+        ApiResponse.ok(it.toProductResponse())
+    } ?: throw SellersException("상품 정보를 찾을 수 없습니다.")
 }
