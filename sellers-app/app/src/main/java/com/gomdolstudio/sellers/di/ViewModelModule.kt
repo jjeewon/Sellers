@@ -2,7 +2,10 @@ package com.gomdolstudio.covidinfoapp.di
 
 import androidx.lifecycle.ViewModel
 import com.gomdolstudio.covidinfoapp.di.factory.AssistedSavedStateViewModelFactory
+import com.gomdolstudio.sellers.di.module.ProductDetailModule
 import com.gomdolstudio.sellers.ui.product.ProductMainViewModel
+import com.gomdolstudio.sellers.ui.product.detail.ProductDetailActivity
+import com.gomdolstudio.sellers.ui.product.detail.ProductDetailViewModel
 import com.gomdolstudio.sellers.ui.product.list.ProductListViewModel
 import com.gomdolstudio.sellers.ui.product.registration.ProductRegistrationViewModel
 import com.gomdolstudio.sellers.ui.signin.SigninViewModel
@@ -50,4 +53,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProductListViewModel::class)
     abstract fun bindsProductListViewModel(factory: ProductListViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProductDetailViewModel::class)
+    abstract fun bindsProductDetailViewModel(factory: ProductDetailViewModel.Factory): AssistedSavedStateViewModelFactory<out ViewModel>
 }
