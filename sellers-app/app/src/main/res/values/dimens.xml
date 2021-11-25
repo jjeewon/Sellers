@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="newsMoreTextSize">20sp</dimen>
+    <dimen name="form_app_bar_height">250dp</dimen>
+</resources>

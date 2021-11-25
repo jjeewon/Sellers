@@ -1,6 +1,6 @@
 package com.gomdolstudio.sellers.ui.product.list
 import android.os.Bundle
-import com.gomdolstudio.sellers.ui.product.list.pager.ProdctListPagerFragment
+import com.gomdolstudio.sellers.ui.product.list.pager.ProductListPagerFragment
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -12,7 +12,7 @@ class ProductListAdapter(fragment: Fragment) : FragmentStateAdapter(fragment){
     }
 
     override fun createFragment(position: Int): Fragment {
-        val fragment = ProdctListPagerFragment()
+        val fragment = ProductListPagerFragment()
         fragment.arguments = Bundle().apply {
             putInt("pos", position)
         }

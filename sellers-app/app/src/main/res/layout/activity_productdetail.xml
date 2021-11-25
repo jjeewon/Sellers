@@ -10,12 +10,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/img_sign"
         >
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="150dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/fixedBar"
             >
@@ -33,32 +31,53 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="20dp"
+                    >
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/user"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{productDetailViewModel.userNameLiveData}"
+                        android:textSize="15dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_gravity="center"
+                    />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFEFD5"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
+                    android:layout_margin="20dp"
                     >
                     <TextView
                         android:id="@+id/product_name_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{productDetailViewModel.productNameLiveData}"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
                         />
+
                     <TextView
-                        android:id="@+id/product_price_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@{productDetailViewModel.priceLiveData}"
-                        />
-                    <TextView
-                        android:id="@+id/product_description_title_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="상품 설명"
-                        />
-                    <TextView
+                        android:layout_marginTop="10dp"
                         android:id="@+id/product_description_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@{productDetailViewModel.descriptionLiveData}"
+                        android:textSize="12dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
             </LinearLayout>
@@ -67,17 +86,35 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fixedBar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/teal_700"
+            android:background="#FFEFD5"
             >
+            <TextView
+                android:id="@+id/product_price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="@{productDetailViewModel.priceLiveData}"
+                />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:padding="10dp"
-                android:text="상품 문의"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/img_inquiry_icon"
+                android:textColor="@color/whiteTextColor"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

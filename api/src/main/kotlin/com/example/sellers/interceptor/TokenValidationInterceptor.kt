@@ -14,11 +14,17 @@ import javax.servlet.http.HttpServletResponse
 class TokenValidationInterceptor @Autowired constructor(
     private val userContextHolder: UserContextHolder
 ) : HandlerInterceptor {
+
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-    override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
+    override fun preHandle(
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        handler: Any
+    ): Boolean {
         val authHeader = request.getHeader(AUTHORIZATION)
-        if(authHeader.isNullOrBlank()) {
+
+        if (authHeader.isNullOrBlank()) {
             val pair = request.method to request.servletPath
             if (!DEFAULT_ALLOWED_API_URLS.contains(pair)) {
                 response.sendError(401)
@@ -26,14 +32,14 @@ class TokenValidationInterceptor @Autowired constructor(
             }
             return true
         } else {
-            val grantType = request.getParameter("grant_type")
+            val grantType = request.getParameter(GRANT_TYPE)
             val token = extractToken(authHeader)
             return handleToken(grantType, token, response)
         }
     }
 
     private fun handleToken(
-        grantType: String,
+        grantType: String?,
         token: String,
         response: HttpServletResponse
     ) = try {
@@ -44,7 +50,7 @@ class TokenValidationInterceptor @Autowired constructor(
         val email = JWTUtil.extractEmail(jwt)
         userContextHolder.set(email)
         true
-    } catch (e: Exception){
+    } catch (e: Exception) {
         logger.error("토큰 검증 실패. token = $token", e)
         response.sendError(401)
         false
@@ -52,7 +58,6 @@ class TokenValidationInterceptor @Autowired constructor(
 
     private fun extractToken(token: String) =
         token.replace(BEARER, "").trim()
-
 
     override fun postHandle(
         request: HttpServletRequest,
@@ -74,4 +79,5 @@ class TokenValidationInterceptor @Autowired constructor(
             "POST" to "/api/v1/users"
         )
     }
+
 }

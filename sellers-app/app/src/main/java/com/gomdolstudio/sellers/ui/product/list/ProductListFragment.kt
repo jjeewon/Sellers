@@ -56,7 +56,7 @@ class ProductListFragment: DaggerFragment() {
         if (savedInstanceState == null) {
         }
         binding.lifecycleOwner = this
-        binding.productListViewMdoel = productListViewModel
+        binding.productListViewModel = productListViewModel
         productListViewModel.getRegistrationClickEvent().observe(this, Observer {
             (activity as ProductMainActivity).moveToRegistrationActivity()
         })

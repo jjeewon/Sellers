@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
+import com.gomdolstudio.sellers.Config
 import com.gomdolstudio.sellers.R
 import com.gomdolstudio.sellers.databinding.ActivityProductdetailBinding
 import com.gomdolstudio.sellers.ui.product.list.ProductListFragment
@@ -31,8 +32,8 @@ class ProductDetailActivity  : DaggerAppCompatActivity(){
         productDetailViewModel.imageUrlsLiveData.observe(this,
         Observer { list -> adapter.setItems(list as ArrayList<String>) })
 
-        if (intent.hasExtra("item_id")) {
-            val id = intent.getLongExtra("item_id", (-1).toLong())
+        if (intent.hasExtra(Config.ITEM_ID)) {
+            val id = intent.getLongExtra(Config.ITEM_ID, -1)
             if (id != (-1).toLong()) productDetailViewModel.loadDetail(id)
         }
 

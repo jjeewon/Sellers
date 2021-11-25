@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.gomdolstudio.covidinfoapp.di.factory.AssistedSavedStateViewModelFactory
 import com.gomdolstudio.sellers.api.response.ApiResponse
 import com.gomdolstudio.sellers.api.response.ProductResponse
+import com.gomdolstudio.sellers.common.Prefs
 import com.gomdolstudio.sellers.data.product.ProductStatus
 import com.gomdolstudio.sellers.data.service.ProductService
 import com.squareup.inject.assisted.Assisted
@@ -27,7 +28,7 @@ class ProductDetailViewModel  @AssistedInject constructor(
     val descriptionLiveData: MutableLiveData<String> = MutableLiveData("")
     val priceLiveData: MutableLiveData<String> = MutableLiveData("-")
     val imageUrlsLiveData: MutableLiveData<MutableList<String>> = MutableLiveData(mutableListOf())
-
+    val userNameLiveData: MutableLiveData<String> = MutableLiveData()
     fun loadDetail(id: Long){
         compositeDisposable.add(productService
             .getProduct(id)
@@ -46,6 +47,7 @@ class ProductDetailViewModel  @AssistedInject constructor(
     }
 
     private fun updateViewData(product: ProductResponse){
+        userNameLiveData.value = Prefs.userName
         val commaSeparatePrice =
             NumberFormat.getInstance().format(product.price)
         val soldOutString =

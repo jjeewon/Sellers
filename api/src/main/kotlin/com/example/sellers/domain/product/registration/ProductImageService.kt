@@ -49,8 +49,7 @@ class ProductImageService @Autowired constructor(
         try{
             image.transferTo(targetFile)
         }catch (e: Exception){
-            System.out.println("donghan"+e.message)
-            System.out.println("donghan"+e.stackTrace.toString())
+            System.out.println("error"+e.message)
         }
         Thumbnails.of(targetFile)
             .crop(Positions.CENTER)

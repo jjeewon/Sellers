@@ -4,17 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:backgroundTint="#CCE5FF"
+        >
         <ImageView
             android:id="@+id/header_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/name_tv"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            android:src="@mipmap/ic_launcher_round"
+            android:src="@drawable/user"
+            android:scaleType="centerCrop"
         />
 
         <TextView
@@ -24,9 +27,11 @@
             app:layout_constraintLeft_toLeftOf="@+id/header_iv"
             app:layout_constraintTop_toBottomOf="@id/header_iv"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/header_iv"
             android:paddingTop="5dp"
             android:textSize="20dp"
-            android:text="사용자명 "
+            android:text="남양주곰돌이"
+            android:layout_marginStart="10dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

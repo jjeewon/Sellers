@@ -74,6 +74,7 @@
                 app:layout_constraintTop_toBottomOf="@id/name_and_description_tv"
                 android:text="@={productRegistrationViewModel.inputName}"
                 android:hint="상품명"
+                style="@style/modifiedEditText"
                 android:maxLength="@{productRegistrationViewModel.productNameLimit}"
                 />
             <TextView
@@ -94,6 +95,7 @@
                 app:layout_constraintLeft_toLeftOf="@id/name_and_description_tv"
                 app:layout_constraintTop_toBottomOf="@id/name_limit_tv"
                 android:hint="상품 설명"
+                style="@style/modifiedEditText"
                 android:text="@={productRegistrationViewModel.inputDescription}"
                 android:maxLength="@{productRegistrationViewModel.descriptionLimit}"
                 />
@@ -144,6 +146,7 @@
                 app:layout_constraintTop_toBottomOf="@id/price_tv"
                 android:layout_marginTop="10dp"
                 android:hint="Ex) 1000"
+                style="@style/modifiedEditText"
                 android:text="@={productRegistrationViewModel.inputPrice}"
                 android:inputType="number"
                 />
@@ -155,6 +158,8 @@
                 android:layout_marginTop="20dp"
                 android:text="상품 등록"
                 android:textSize="20dp"
+                android:textColor="@color/whiteTextColor"
+                android:background="@drawable/centre_button"
                 android:onClick="@{() -> productRegistrationViewModel.register()}"
                 />
 

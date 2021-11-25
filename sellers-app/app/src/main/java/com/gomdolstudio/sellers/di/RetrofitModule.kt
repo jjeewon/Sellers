@@ -43,5 +43,11 @@ class RetrofitModule {
         return retrofit.create(RefreshService::class.java)
     }
 
+    @Provides
+    @Reusable
+    fun provideProductRetrofitService(@Named("registration") retrofit: Retrofit): ProductService{
+        return retrofit.create(ProductService::class.java)
+    }
+
 }
 

@@ -16,6 +16,7 @@ import com.gomdolstudio.sellers.R
 import com.gomdolstudio.sellers.api.response.ProductListItemResponse
 import com.gomdolstudio.sellers.databinding.FragmentProductlistBinding
 import com.gomdolstudio.sellers.databinding.FragmentProductlistpagerBinding
+import com.gomdolstudio.sellers.ui.product.ProductMainActivity
 
 
 class ProductListPagerFragment : Fragment() {
@@ -57,7 +58,16 @@ class ProductListPagerFragment : Fragment() {
         productListPagerViewmodel.products.observe( viewLifecycleOwner, Observer {
             pagedList: PagedList<ProductListItemResponse> -> adapter.submitList(pagedList)
         })
+        productListPagerViewmodel.getProductItemClickedEvent().observe( viewLifecycleOwner, Observer {
+            itemId: Long? -> moveToProductDetailActivity(itemId)
+        })
 
+    }
+
+    fun moveToProductDetailActivity(itemId: Long?){
+        itemId?.let{
+            (activity as ProductMainActivity).moveToProductDetatilActivity(it)
+        }
     }
 
 

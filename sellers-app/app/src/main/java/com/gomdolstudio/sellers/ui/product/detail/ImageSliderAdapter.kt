@@ -19,6 +19,7 @@ import com.gomdolstudio.sellers.R
 
 
 import android.widget.TextView
+import com.gomdolstudio.sellers.Config
 import com.gomdolstudio.sellers.api.response.ProductListItemResponse
 import com.gomdolstudio.sellers.data.product.ProductStatus
 import com.gomdolstudio.sellers.ui.product.list.pager.ProductListPagedAdapter
@@ -43,7 +44,7 @@ class ImageSliderAdapter : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHold
     }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        holder.bind(imageUrls[position])
+        holder.bind(imageUrls[position], position, imageUrls.size)
     }
 
     override fun getItemCount(): Int {
@@ -55,16 +56,23 @@ class ImageSliderAdapter : RecyclerView.Adapter<ImageSliderAdapter.ImageViewHold
     ) : RecyclerView.ViewHolder(
         view
     ){
-        fun bind(item: String?) = item?.let {
-            val imageView = itemView.product_image_iv
-            imageView?.let{
+        fun bind(item: String?, position: Int, totalSize: Int) = item?.let {
+            bindImageView(item, itemView.product_image_iv)
+            bindImageNumTextView(position, totalSize, itemView.product_image_num_tv)
+        }
+
+        fun bindImageView(item: String?, imageView: ImageView){
+            imageView.let{
                 Glide.with(it)
-                    .load("http://10.0.2.2:8080${item}")
+                    .load("${Config.SERVER_ADDRESS}${item}")
                     .into(it)
             }
         }
 
+        fun bindImageNumTextView(position: Int, totalSize: Int, textView: TextView){
+            textView.apply{
+                text = (position+1).toString() + "/" + totalSize.toString()
+            }
+        }
     }
-
-
 }

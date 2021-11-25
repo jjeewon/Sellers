@@ -27,14 +27,7 @@ abstract class ProductMainModule {
         fun provideProductMainActivityBinding(activity: ProductMainActivity): ActivityProductmainBinding {
             return DataBindingUtil.setContentView(activity, R.layout.activity_productmain)
         }
-        /*
-         @JvmStatic
-        @Provides
-        @ActivityScope
-        fun provideViewModelProvider(activity: ProductMainActivity, viewModelFactory: InjectingSavedStateViewModelFactory): ViewModelProvider {
-            return ViewModelProvider(activity, viewModelFactory.create(activity))
-        }
-         */
+
 
 
         @ActivityContext
