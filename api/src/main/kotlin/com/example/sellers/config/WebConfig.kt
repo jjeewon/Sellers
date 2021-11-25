@@ -17,7 +17,7 @@ class WebConfig @Autowired constructor(
     }
 
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
-        registry.addResourceHandler("/images/**")
-            .addResourceLocations("file://sellers/images/")
+        registry.addResourceHandler("/Users/jiwon/Documents/documents/GitHub/Sellers/**")
+            .addResourceLocations("file:///Users/jiwon/Documents/documents/GitHub/Sellers/")
     }
 }
