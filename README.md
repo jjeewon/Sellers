@@ -3,4 +3,6 @@
 중고 물품 거래 어플 Sellers 🤝  
 
 ## ScreenShots
-<img width="1000" alt="Sellers" src="https://user-images.githubusercontent.com/18653295/140720305-5db60cf9-491e-45d2-bb83-96b4ffe3513a.jpg">  
+<img width="1000" alt="Sellers" src="https://user-images.githubusercontent.com/18653295/143364780-d395ed91-8372-4253-a224-3e7b38853278.jpg">  
+<img width="1000" alt="Sellers" src="https://user-images.githubusercontent.com/18653295/143364667-645274f1-365a-4783-92cb-cf8eb905c44a.png">  
+
